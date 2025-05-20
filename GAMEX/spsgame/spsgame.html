@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stone Paper Scissors Game</title>
+    <link rel="stylesheet" href="spsgame.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Stone Paper Scissors</h1>
+        <div class="choices">
+            <button class="choice" data-choice="stone">🪨 Stone</button>
+            <button class="choice" data-choice="paper">📄 Paper</button>
+            <button class="choice" data-choice="scissors">✂️ Scissors</button>
+        </div>
+        <div class="result">
+            <p id="user-choice">Your Choice: -</p>
+            <p id="computer-choice">Computer's Choice: -</p>
+            <h2 id="winner">Let's Play!</h2>
+        </div>
+    </div>
+    <script>
+        const choices = ["stone", "paper", "scissors"];
+        const userChoiceP = document.getElementById('user-choice');
+        const computerChoiceP = document.getElementById('computer-choice');
+        const winnerH2 = document.getElementById('winner');
+        document.querySelectorAll('.choice').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const userChoice = btn.getAttribute('data-choice');
+                const computerChoice = choices[Math.floor(Math.random() * 3)];
+                userChoiceP.textContent = `Your Choice: ${capitalize(userChoice)}`;
+                computerChoiceP.textContent = `Computer's Choice: ${capitalize(computerChoice)}`;
+                winnerH2.textContent = getWinner(userChoice, computerChoice);
+            });
+        });
+        function getWinner(user, computer) {
+            if (user === computer) return "It's a Draw!";
+            if (
+                (user === "stone" && computer === "scissors") ||
+                (user === "paper" && computer === "stone") ||
+                (user === "scissors" && computer === "paper")
+            ) return "You Win!";
+            return "Computer Wins!";
+        }
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+    </script>
+</body>
+</html>

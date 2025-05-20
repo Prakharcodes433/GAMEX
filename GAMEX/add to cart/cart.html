@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="cart.css">
+  <title>Cart - Add to Bag</title>
+</head>
+<body>
+  <div class="cart-container">
+    <h1 class="cart-title">🛒 Your Shopping Bag</h1>
+    <div class="cart-actions">
+      <button class="checkout-btn cart-action-btn" onclick="cartCount+=1; updateCartSummary();">ADD TO BAG</button>
+      <button class="remove-btn cart-action-btn" onclick="cartCount-=1; updateCartSummary();">WISHLIST</button>
+      <button class="qty-btn cart-action-btn" onclick="cartCount+=2; updateCartSummary();">ADD 1+1 SALE</button>
+    </div>
+    <h2 id="cartsummary" class="total-label" style="text-align:center;">YOUR BAG HAS 0 ITEMS</h2>
+  </div>
+  <script>
+    let cartCount = 0;
+    function updateCartSummary() {
+      if(cartCount < 0) cartCount = 0;
+      document.querySelector('#cartsummary').innerText = `YOUR BAG HAS ${cartCount} ITEMS`;
+    }
+    updateCartSummary();
+  </script>
+</body>
+</html>
